@@ -1,0 +1,44 @@
+{
+  "name": "node-starter",
+  "version": "1.0.0",
+  "description": "Node typescript starter 🚀",
+  "main": "index.js",
+  "scripts": {
+    "start": "NODE_ENV=production node dist/index.js",
+    "dev": "NODE_ENV=development nodemon",
+    "build": "./node_modules/.bin/tsc",
+    "lint": "./node_modules/.bin/eslint . --fix",
+    "migrate": "ts-node ./node_modules/typeorm/cli.js migration:run",
+    "migrate:reset": "ts-node ./node_modules/typeorm/cli.js migration:revert"
+  },
+  "keywords": [],
+  "author": "peterkimzz <peterkimzz69@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/cookie-parser": "^1.4.2",
+    "@types/express": "^4.17.7",
+    "@types/http-errors": "^1.8.0",
+    "@types/morgan": "^1.9.1",
+    "@types/node": "^14.0.19",
+    "@types/uuid": "^8.0.0",
+    "nodemon": "^2.0.4",
+    "ts-node": "^8.10.2",
+    "typescript": "^3.9.6"
+  },
+  "dependencies": {
+    "@types/jsonwebtoken": "^8.5.0",
+    "axios": "^0.19.2",
+    "class-validator": "^0.12.2",
+    "cookie-parser": "^1.4.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "http-errors": "^1.8.0",
+    "jsonwebtoken": "^8.5.1",
+    "moment": "^2.27.0",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.1.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.25",
+    "uuid": "^8.2.0"
+  }
+}

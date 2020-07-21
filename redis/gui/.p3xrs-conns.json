@@ -1,0 +1,16 @@
+{
+    "update": "2020-03-10T01:18:31.894Z",
+    "list": [
+        {
+            "awsElastiCache": false,
+            "azure": false,
+            "name": "localhost",
+            "host": "cache",
+            "port": 6379,
+            "id": "P3Xidf2fa302c071010000f7d755a7b4819",
+            "cluster": false,
+            "nodes": []
+        }
+    ],
+    "license": ""
+}
