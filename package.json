@@ -1,5 +1,5 @@
 {
-  "name": "node-starter",
+  "name": "api.datascanner.io",
   "version": "1.0.0",
   "description": "Node typescript starter 🚀",
   "main": "index.js",
@@ -7,9 +7,13 @@
     "start": "NODE_ENV=production node dist/index.js",
     "dev": "NODE_ENV=development nodemon",
     "build": "./node_modules/.bin/tsc",
-    "lint": "./node_modules/.bin/eslint . --fix",
-    "migrate": "ts-node ./node_modules/typeorm/cli.js migration:run",
-    "migrate:reset": "ts-node ./node_modules/typeorm/cli.js migration:revert"
+    "migrate:run": "ts-node ./node_modules/typeorm/cli.js migration:run",
+    "migrate:revert": "ts-node ./node_modules/typeorm/cli.js migration:revert",
+    "seed": "yarn schema:sync && yarn seed:run",
+    "seed:run": "ts-node ./node_modules/typeorm-seeding/dist/cli.js seed",
+    "schema:drop": "ts-node ./node_modules/typeorm/cli.js schema:drop",
+    "schema:sync": "ts-node ./node_modules/typeorm/cli.js schema:sync",
+    "db:reset": "yarn schema:drop && yarn schema:sync"
   },
   "keywords": [],
   "author": "peterkimzz <peterkimzz69@gmail.com>",
@@ -17,7 +21,9 @@
   "devDependencies": {
     "@types/cookie-parser": "^1.4.2",
     "@types/express": "^4.17.7",
+    "@types/faker": "^4.1.12",
     "@types/http-errors": "^1.8.0",
+    "@types/jsonwebtoken": "^8.5.0",
     "@types/morgan": "^1.9.1",
     "@types/node": "^14.0.19",
     "@types/uuid": "^8.0.0",
@@ -26,12 +32,12 @@
     "typescript": "^3.9.6"
   },
   "dependencies": {
-    "@types/jsonwebtoken": "^8.5.0",
     "axios": "^0.19.2",
     "class-validator": "^0.12.2",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "faker": "^4.1.0",
     "http-errors": "^1.8.0",
     "jsonwebtoken": "^8.5.1",
     "moment": "^2.27.0",
@@ -39,6 +45,8 @@
     "mysql2": "^2.1.0",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.25",
-    "uuid": "^8.2.0"
+    "typeorm-seeding": "^1.6.1",
+    "uuid": "^8.2.0",
+    "xlsx": "^0.16.4"
   }
 }

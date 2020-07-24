@@ -1,9 +1,9 @@
 import express from 'express'
 import v1 from './v1'
 
-const router = express.Router()
+const Router = express.Router()
 
-router.get('/favicon.ico', (req, res) => res.sendStatus(204))
-router.use('/v1', v1)
+Router.get('/favicon.ico', (req, res) => res.sendStatus(204))
+Router.use('/v1', v1)
 
-export default router
+export { Router }

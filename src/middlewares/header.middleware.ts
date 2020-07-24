@@ -5,15 +5,12 @@ export const HeaderMiddleware: IMiddleware = async (req, res, next) => {
   const IS_PROD = process.env.NODE_ENV === 'production'
 
   res.setHeader('Access-Control-Allow-Credentials', 'true')
-  res.setHeader(
-    'Access-Control-Allow-Headers',
-    'Content-Type,Content-Language,Authorization,X-Requested-With,Origin'
-  )
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type,Content-Language,Authorization,X-Requested-With,Origin')
 
   /** CORS 설정 */
   const allowlist: string[] = []
   if (IS_PROD) {
-    allowlist.push('https://www.example.com')
+    allowlist.push(process.env.PUBLIC_URL as string)
   } else {
     allowlist.push('http://localhost:3001')
     allowlist.push('http://127.0.0.1:3001')

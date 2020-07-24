@@ -1,5 +1,12 @@
-import { AbstractRepository, FindManyOptions, DeepPartial, FindOneOptions } from 'typeorm'
-import { RootEntity, UuidEntity } from '../database/entity'
+import {
+  AbstractRepository,
+  FindManyOptions,
+  DeepPartial,
+  FindOneOptions,
+  FindConditions,
+  EntityRepository
+} from 'typeorm'
+import { RootEntity, UuidEntity } from '../database/entities'
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity'
 import { OrderedUUID } from '../utils/uuid'
 import { CustomError } from '../utils/error'
@@ -18,7 +25,6 @@ export abstract class RootRepository<T extends RootEntity> extends AbstractRepos
       if (!output) {
         throw CustomError(500)
       }
-
       return Promise.resolve(output)
     } catch (err) {
       return Promise.reject(err)
@@ -36,6 +42,9 @@ export abstract class RootRepository<T extends RootEntity> extends AbstractRepos
     } catch (err) {
       return Promise.reject(err)
     }
+  }
+  public async Update(condition: FindConditions<T>, schema: QueryDeepPartialEntity<T>) {
+    return this.repository.update(condition, schema)
   }
 
   public DeleteByPk(id: number) {
@@ -67,6 +76,7 @@ export abstract class RootRepository<T extends RootEntity> extends AbstractRepos
   }
 }
 
+@EntityRepository(UuidEntity)
 export abstract class UuidRepository<T extends UuidEntity> extends RootRepository<T> {
   /**
    * uuid의 length는 무조건 32이어야 함
@@ -111,6 +121,8 @@ export abstract class UuidRepository<T extends UuidEntity> extends RootRepositor
   }
 
   public DeleteByUuid(uuid: string) {
+    // return this.repository.softDelete({ uuid: OrderedUUID.ToBinary(uuid) })
+
     this.ValidateUuid(uuid)
 
     return this.repository

@@ -30,7 +30,8 @@ services:
       context: .
       dockerfile: Dockerfile.dev
     restart: always
-    command: yarn dev
+    command: /bin/sh -c 'yarn migrate && yarn dev'
+    # command: /bin/sh -c 'yarn dev'
     volumes:
       - .:/usr/src/app
       - app_data:/usr/src/app/node_modules

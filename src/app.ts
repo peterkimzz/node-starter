@@ -1,7 +1,7 @@
 import express from 'express'
 import morgan from 'morgan'
 import cookieParser from 'cookie-parser'
-import router from './routes'
+import { Router } from './routes'
 import { NotFoundErrorMiddleware, ErrorMiddleware } from './middlewares/error'
 
 const IS_PROD = process.env.NODE_ENV === 'production'
@@ -18,7 +18,7 @@ export class Application {
     this._instance.use(express.json({ limit: '10mb' }))
     this._instance.use(express.urlencoded({ extended: true }))
     this._instance.use(cookieParser(process.env.COOKIE_SECRET as string))
-    this._instance.use(router)
+    this._instance.use(Router)
     this._instance.use(NotFoundErrorMiddleware)
     this._instance.use(ErrorMiddleware)
   }

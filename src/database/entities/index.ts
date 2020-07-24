@@ -25,6 +25,11 @@ interface IUuidEntity {
   BufferToString: () => void
 }
 
+interface ToClientOptions {
+  dates?: boolean
+  from_now?: boolean
+}
+
 //#region Abstract Entities
 export abstract class RootEntity implements IRootEntity {
   @PrimaryGeneratedColumn()
@@ -42,14 +47,21 @@ export abstract class RootEntity implements IRootEntity {
   created_at_from_now!: string
   updated_at_from_now!: string
 
-  ToClient() {
+  ToClient(options?: ToClientOptions) {
     const values = Object.assign({}, this)
 
     delete values.id
     delete values.deleted_at
 
-    values.created_at_from_now = moment(values.created_at).fromNow()
-    values.updated_at_from_now = moment(values.updated_at).fromNow()
+    if (options?.from_now === true) {
+      values.created_at_from_now = moment(values.created_at).fromNow()
+      values.updated_at_from_now = moment(values.updated_at).fromNow()
+    }
+
+    if (options?.dates !== true) {
+      delete values.created_at
+      delete values.updated_at
+    }
 
     return values
   }
